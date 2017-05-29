@@ -10,7 +10,7 @@ development:
   username: postgres
   password: postgres
 
-development:
+test:
   <<: *default
   database: ycurve_test
   host: localhost

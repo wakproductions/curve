@@ -22,6 +22,7 @@ gem 'turbolinks',     '~> 5'
 gem 'uglifier',       '>= 1.3.0'
 
 # Utility and design pattern enhancing gems
+gem 'nokogiri',       '~> 1.7'
 gem 'verbalize',      '~> 2.0'
 
 # Front end enhancements
