@@ -3,36 +3,27 @@
 .section-chart
   .container
     .col-lg-12
-      .as-of-date As of 5/16/2017
+      -#.as-of-date As of 5/16/2017  # This will be where the current date navigation appears
 
       #chart-canvas{ style: 'position: relative; height: 700px; max-width: 700px;' }
         %canvas#chartTreasuryYieldCurve
 
 :javascript
+  window.chartColors = {
+    blue: 'rgb(54, 162, 235)',
+    red: 'rgb(255, 99, 132)',
+    yellow: 'rgb(255, 205, 86)',
+    green: 'rgb(75, 192, 192)',
+    orange: 'rgb(255, 159, 64)',
+    purple: 'rgb(153, 102, 255)',
+    grey: 'rgb(201, 203, 207)'
+  };
   const TERMS = ['1M', '3M', '6M', '1Y', '2Y', '3Y', '5Y', '7Y', '10Y', '20Y', '30Y']
   var config = {
       type: 'line',
       data: {
           labels: TERMS,
-          datasets: [{
-              label: "Daily Treasury Yield Curve 5/26/17",
-              backgroundColor: 'rgb(54, 162, 235)',
-              borderColor: 'rgb(54, 162, 235)',
-              data: [
-                0.75,
-                0.94,
-                1.08,
-                1.17,
-                1.30,
-                1.46,
-                1.79,
-                2.06,
-                2.25,
-                2.65,
-                2.92
-              ],
-              fill: false,
-          }]
+          datasets: []
       },
       options: {
           responsive: true,
@@ -65,14 +56,68 @@
               }]
           }
       },
-      height: '300px'
+  };
+
+  add_data = function(yield_curve_date, values) {
+      console.log(config.data.datasets.length);
+    var newDataset = {
+      label: "As of " + yield_curve_date,
+      backgroundColor: nextChartColor(config.data.datasets.length + 1),
+      borderColor: nextChartColor(config.data.datasets.length + 1),
+      data: values,
+      fill: false,
+    };
+
+    config.data.datasets.push(newDataset);
+    window.chartTreasuryYieldCurve.update();
+  }
+
+  formatDate = function(date, format) {
+    var day = date.getDate();
+    var month = date.getMonth() + 1;
+    var year = date.getFullYear();
+
+    var pad = "00";
+
+    if(format=='YYYYMMDD') {
+      return year + pad.substring(0, pad.length - month.toString().length) + month + pad.substring(0, pad.length - day.toString().length) + day;
+    } else {
+      return month + '/' + day + '/' + year;
+    };
+  }
+
+  fetch_data = function(as_of_date) {
+    if(as_of_date==null) as_of_date = new Date();
+
+    $.get('/api/v1/yield_curve_snapshot', {date: formatDate(as_of_date, 'YYYYMMDD')}, function(data) {
+        add_data(
+          formatDate(new Date(Date.parse(data[0]['yield_curve_date']))),
+          [
+            parseFloat(data[0]['yield_1m']),
+            parseFloat(data[0]['yield_3m']),
+            parseFloat(data[0]['yield_6m']),
+            parseFloat(data[0]['yield_1y']),
+            parseFloat(data[0]['yield_2y']),
+            parseFloat(data[0]['yield_3y']),
+            parseFloat(data[0]['yield_5y']),
+            parseFloat(data[0]['yield_7y']),
+            parseFloat(data[0]['yield_10y']),
+            parseFloat(data[0]['yield_20y']),
+            parseFloat(data[0]['yield_30y']),
+          ]
+        );
+    });
+  }
+
+  nextChartColor = function(datasetnum) {
+    chartColors = Object.values(window.chartColors);
+    return chartColors[datasetnum % chartColors.length - 1];
   };
 
   window.onload = function() {
       var ctx = document.getElementById("chartTreasuryYieldCurve").getContext("2d");
-      // ctx.canvas.parentNode.style.height ='500px';
       window.chartTreasuryYieldCurve = new Chart(ctx, config);
-      // ctx.canvas.parentNode.style.height ='500px';
+      fetch_data();
   };
 
   // document.getElementById('randomizeData').addEventListener('click', function() {
@@ -135,47 +180,3 @@
   // });
 
 
--#:javascript
--#  var ctx = document.getElementById("chartTreasuryYieldCurve");
--#  var myChart = new Chart(ctx, {
--#    type: 'bar',
--#    data: {
--#      labels: ['9', '49', '151', '8', '3', '82', 'N5', '79'],
--#      datasets: [{
--#        label: '# of Stops',
--#        data: [273, 242, 221, 220, 213, 209, 206, 206],
--#        backgroundColor: [
--#          'rgba(255, 99, 132, 0.2)',
--#          'rgba(54, 162, 235, 0.2)',
--#          'rgba(255, 206, 86, 0.2)',
--#          'rgba(75, 192, 192, 0.2)',
--#          'rgba(153, 102, 255, 0.2)',
--#          'rgba(255, 204, 255, 0.2)',
--#          'rgba(204, 102, 0, 0.2)',
--#          'rgba(155, 155, 155, 0.2)'
--#        ],
--#        borderColor: [
--#          'rgba(255,99,132,1)',
--#          'rgba(54, 162, 235, 1)',
--#          'rgba(255, 206, 86, 1)',
--#          'rgba(75, 192, 192, 1)',
--#          'rgba(153, 102, 255, 1)',
--#          'rgba(255, 204, 255, 1)',
--#          'rgba(204, 102, 0, 1)',
--#          'rgba(155, 155, 155, 1)'
--#        ],
--#        borderWidth: 1
--#      }]
--#    },
--#    options: {
--#      responsive: false,
--#      scales: {
--#        yAxes: [{
--#          ticks: {
--#            beginAtZero:true
--#          }
--#        }]
--#      }
--#    }
--#  });
-  
