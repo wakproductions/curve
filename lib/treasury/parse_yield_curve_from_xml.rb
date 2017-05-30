@@ -18,7 +18,7 @@ module Treasury
       properties.map do |p|
         {
           treasury_datum_id:  p.xpath('d:Id').text.to_i,
-          yield_date:         Time.parse(p.xpath('d:NEW_DATE').text).to_date,
+          yield_curve_date:   Time.parse(p.xpath('d:NEW_DATE').text).to_date,
           yield_1m:           p.xpath('d:BC_1MONTH').text.to_f,
           yield_3m:           p.xpath('d:BC_3MONTH').text.to_f,
           yield_6m:           p.xpath('d:BC_6MONTH').text.to_f,

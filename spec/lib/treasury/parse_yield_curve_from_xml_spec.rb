@@ -12,7 +12,7 @@ describe Treasury::ParseYieldCurveFromXML do
     Utilities::ConvertHashFloatsToStrings.convert_hash_floats_to_strings(
       {
         treasury_datum_id:  6840,
-        yield_date:         Date.new(2017,5,1),
+        yield_curve_date:   Date.new(2017,5,1),
         yield_1m:           0.67,
         yield_3m:           0.83,
         yield_6m:           0.98,
@@ -31,7 +31,7 @@ describe Treasury::ParseYieldCurveFromXML do
     Utilities::ConvertHashFloatsToStrings.convert_hash_floats_to_strings(
       {
         treasury_datum_id:  6859,
-        yield_date:         Date.new(2017,5,26),
+        yield_curve_date:   Date.new(2017,5,26),
         yield_1m:           0.75,
         yield_3m:           0.94,
         yield_6m:           1.08,
