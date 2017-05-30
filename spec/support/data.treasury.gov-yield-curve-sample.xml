@@ -17,7 +17,7 @@
       <m:properties>
         <d:Id m:type="Edm.Int32">6840</d:Id>
         <d:NEW_DATE m:type="Edm.DateTime">2017-05-01T00:00:00</d:NEW_DATE>
-        <d:BC_1MONTH m:type="Edm.Double">0.67</d:BC_1MONTH>
+        <d:BC_1MONTH m:type="Edm.Double" m:null="true" />
         <d:BC_3MONTH m:type="Edm.Double">0.83</d:BC_3MONTH>
         <d:BC_6MONTH m:type="Edm.Double">0.98</d:BC_6MONTH>
         <d:BC_1YEAR m:type="Edm.Double">1.09</d:BC_1YEAR>

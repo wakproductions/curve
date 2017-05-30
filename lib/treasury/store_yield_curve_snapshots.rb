@@ -1,5 +1,5 @@
 module Treasury
-  class LoadYieldCurveSnapshots
+  class StoreYieldCurveSnapshots
     include Verbalize::Action
 
     input :snapshots

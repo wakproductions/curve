@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Treasury::LoadYieldCurveSnapshots do
+describe Treasury::StoreYieldCurveSnapshots do
   context 'call' do
     subject { described_class.call(snapshots: input) }
 

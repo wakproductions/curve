@@ -13,7 +13,7 @@ describe Treasury::ParseYieldCurveFromXML do
       {
         treasury_datum_id:  6840,
         yield_curve_date:   Date.new(2017,5,1),
-        yield_1m:           0.67,
+        yield_1m:           nil,
         yield_3m:           0.83,
         yield_6m:           0.98,
         yield_1y:           1.09,
