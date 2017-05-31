@@ -46,7 +46,7 @@ group :development do
   gem 'listen',      '~> 3.0.5', '< 3.2'
 
   gem 'capistrano',         '3.6.1'
-  gem 'capistrano3-puma'
+  # gem 'capistrano3-puma'
   gem 'capistrano-rails',   require: false
   gem 'capistrano-bundler', require: false
 end

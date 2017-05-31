@@ -4,9 +4,9 @@ require 'capistrano/deploy'
 
 require 'capistrano/rails'
 require 'capistrano/bundler'
-require 'capistrano/puma'
+# require 'capistrano/puma'
 
-install_plugin Capistrano::Puma
+# install_plugin Capistrano::Puma
 
 # Loads custom tasks from `lib/capistrano/tasks' if you have any defined.
-Dir.glob('lib/capistrano/tasks/*.rake').each { |r| import r }
+# Dir.glob('lib/capistrano/tasks/*.rake').each { |r| import r }
