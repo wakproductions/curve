@@ -1,0 +1,1 @@
+server 'wak-ustreasuryyieldcurve-production', user: 'ubuntu', roles: %w{web app db}
