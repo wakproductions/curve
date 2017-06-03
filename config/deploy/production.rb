@@ -4,11 +4,16 @@ namespace :custom do
   task :setup_container do
     on roles(:web) do |host|
       puts "================Starting Docker setup===================="
-      execute "cd #{fetch(:deploy_to)}/current"
+      # execute "cd #{fetch(:deploy_to)}/current"
       execute "sudo docker stop #{fetch(:docker_container_name)}; echo 0"
       execute "sudo docker rm -fv #{fetch(:docker_container_name)}; echo 0"
-      execute "sudo docker-compose build"
-      execute "sudo docker-compose up -d"
+      
+      # Working directory hack
+      # https://stackoverflow.com/questions/19452983/capistrano-3-execute-within-a-directory
+      within release_path do
+        execute "sudo docker-compose build"
+        execute "sudo docker-compose up -d"
+      end
     end
   end
 end
