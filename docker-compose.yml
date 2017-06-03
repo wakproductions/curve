@@ -4,8 +4,10 @@ services:
     container_name: ycurve
     build: .
     command:
-      - rake db:migrate
       - bundle exec rails s -p 3000
+    environment:
+      - DATABASE_URL=${DATABASE_URL}
+      - RAILS_ENV=${RAILS_ENV:-development}
     extra_hosts:
       - localhost:${LOCAL_IP}
     ports:
