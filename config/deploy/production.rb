@@ -5,9 +5,9 @@ namespace :custom do
     on roles(:web) do |host|
       puts "================Starting Docker setup===================="
       execute "cd #{deploy_to}/current"
-      execute "docker stop #{fetch(:docker_container_name)}; echo 0"
-      execute "docker rm -fv #{fetch(:docker_container_name)}; echo 0"
-      execute 'docker-compose build && docker-compose up'
+      execute "sudo docker stop #{fetch(:docker_container_name)}; echo 0"
+      execute "sudo docker rm -fv #{fetch(:docker_container_name)}; echo 0"
+      execute "sudo docker-compose build && docker-compose up -d"
     end
   end
 end
