@@ -19,7 +19,4 @@ test:
 
 production:
   <<: *default
-  database: ycurve_prod
-  host:     <%= ENV['YCURVE_DBHOST'] %>
-  username: <%= ENV['YCURVE_USERNAME'] %>
-  password: <%= ENV['YCURVE_PASSWORD'] %>
+  # Use the DATABASE_URL env variable

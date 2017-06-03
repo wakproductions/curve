@@ -1,0 +1,13 @@
+version: '3'
+services:
+  web:
+    container_name: ycurve
+    build: .
+    command:
+      - rake db:migrate
+      - bundle exec rails s -p 3000
+    extra_hosts:
+      - localhost:${LOCAL_IP}
+    ports:
+      - ${HTTP_PORT:-80}:3000
+    tty: true

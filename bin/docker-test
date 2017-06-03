@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+docker-compose build && docker-compose run -e DATABASE_URL=postgres://postgres:postgres@localhost:5432/ycurve_test web rspec spec
