@@ -10,10 +10,8 @@ namespace :custom do
       
       # Working directory hack
       # https://stackoverflow.com/questions/19452983/capistrano-3-execute-within-a-directory
-      within release_path do
-        execute "sudo docker-compose build"
-        execute "sudo docker-compose up -d"
-      end
+      execute "cd #{fetch(:deploy_to)}/current; sudo docker-compose build"
+      execute "cd #{fetch(:deploy_to)}/current; sudo docker-compose up -d"
     end
   end
 end
