@@ -1,4 +1,4 @@
-server 'wak-ustreasuryyieldcurve-production', user: 'ubuntu', roles: %w{web app db}
+server 'ycurve-production', user: 'ubuntu', roles: %w{web app db}
 
 namespace :custom do
   task :setup_container do
@@ -12,4 +12,4 @@ namespace :custom do
   end
 end
 
-after "custom:setup_container"
+after "deploy:published", "custom:setup_container"
