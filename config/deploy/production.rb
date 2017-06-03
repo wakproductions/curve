@@ -8,9 +8,8 @@ namespace :custom do
       execute "docker stop #{fetch(:docker_container_name)}; echo 0"
       execute "docker rm -fv #{fetch(:docker_container_name)}; echo 0"
       execute 'docker-compose build && docker-compose up'
-      execute "docker exec -it #{fetch(:docker_container_name)} bundle exec rake db:migrate"
     end
   end
 end
 
-after "deploy:finishing", "custom:setup_container"
+after "custom:setup_container"
