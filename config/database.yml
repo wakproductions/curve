@@ -5,7 +5,10 @@ default: &default
 
 development:
   <<: *default
-  # using DATABASE_URL
+  hostname: localhost
+  username: postgres
+  password: postgres
+  database: ycurve_development
 
 test:
   <<: *default

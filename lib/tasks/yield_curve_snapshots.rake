@@ -3,4 +3,12 @@ namespace :yield_curve_snapshots do
   task :update => :environment do
     Treasury::FetchAndStoreYieldCurve.(month: Date.today.month, year: Date.today.year)
   end
+
+  task :run_update_daemon => :environment do
+    Daemons::UpdateYieldCurve.run
+
+    while
+      sleep 100
+    end
+  end
 end

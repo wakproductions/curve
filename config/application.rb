@@ -16,5 +16,6 @@ module Ycurve
     # -- all .rb files in that directory are automatically loaded.
 
     config.eager_load_paths << 'lib'
+    config.time_zone = 'Eastern Time (US & Canada)'
   end
 end

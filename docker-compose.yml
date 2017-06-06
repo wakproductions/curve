@@ -16,3 +16,4 @@ services:
     tty: true
     volumes:
       - ./log:/app/log
+      - ./public/assets:/app/public/assets
