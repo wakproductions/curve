@@ -4,8 +4,8 @@ namespace :custom do
   task :setup_container do
     on roles(:web) do |host|
       puts "================Starting Docker setup===================="
-      execute "sudo docker stop $(docker-compose ps -q web); echo 0"
-      execute "sudo docker rm $(docker ps -a | grep #{fetch(:docker_container_name)} | awk \"{print \$1}\"); echo 0"
+      execute "sudo docker stop $(sudo docker ps -q)"
+      execute "sudo docker rm $(docker ps -a | grep #{fetch(:docker_container_name)} | awk \"{print \$1}\")"
 
       # Working directory hack
       # https://stackoverflow.com/questions/19452983/capistrano-3-execute-within-a-directory
