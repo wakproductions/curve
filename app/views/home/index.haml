@@ -98,7 +98,7 @@
 
     $.get('/api/v1/yield_curve_snapshot', {date: formatDate(as_of_date, 'YYYYMMDD')}, function(data) {
         add_data(
-          formatDate(new Date(Date.parse(data[0]['yield_curve_date']))),
+          formatDate(new Date(Date.parse(data[0]['yield_curve_date'] + " GMT-0400 (EDT)"))),
           [
             parseFloat(data[0]['yield_1m']),
             parseFloat(data[0]['yield_3m']),
