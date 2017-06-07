@@ -9,7 +9,8 @@ namespace :custom do
       execute "cd #{fetch(:deploy_to)}/current; sudo docker-compose build"
 
       execute "sudo docker stop $(sudo docker ps -q)"
-      execute "sudo docker rm $(docker ps -a | grep #{fetch(:docker_container_name)} | awk \"{print \$1}\")"
+      # execute "sudo docker rm $(docker ps -a | grep #{fetch(:docker_container_name)} | awk \"{print \$1}\")"
+      execute "sudo docker rm $(sudo docker ps -aq)"
 
       execute "cd #{fetch(:deploy_to)}/current; sudo docker-compose up -d"
 
