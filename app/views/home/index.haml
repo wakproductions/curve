@@ -1,12 +1,19 @@
-%h1 US Treasuries Yield Curve
+%h1.center US Treasuries Yield Curve
 
 .section-chart
   .container
-    .col-lg-12
-      -#.as-of-date As of 5/16/2017  # This will be where the current date navigation appears
+    .row
+      .col-md-offset-1.col-md-10.interest-rate-chart.center
+        -#.as-of-date As of 5/16/2017  # This will be where the current date navigation appears
 
-      #chart-canvas{ style: 'position: relative; height: 700px; max-width: 700px;' }
-        %canvas#chartTreasuryYieldCurve
+        #chart-canvas-horizontal
+          #chart-canvas{ style: 'position: relative; max-width: 877px;' }
+            %canvas#chartTreasuryYieldCurve
+
+    .row
+      .col-lg-12.center
+        = "For an explanation: #{link_to('Term Structure of Interest Rates', 'http://www.investopedia.com/terms/t/termstructure.asp', target: '_blank')}".html_safe
+
 
 :javascript
   window.chartColors = {
@@ -180,3 +187,4 @@
   // });
 
 
+= render partial: 'google_analytics'
