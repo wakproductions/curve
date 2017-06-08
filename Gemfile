@@ -27,8 +27,9 @@ gem 'rufus-scheduler','~> 3.4'
 gem 'verbalize',      '~> 2.0'
 
 # Front end enhancements
-gem 'chart-js-rails', '~> 0.1'
-gem 'react-rails',    '~> 2.2'
+gem 'chart-js-rails',     '~> 0.1'
+gem 'font-awesome-rails', '~> 4.7'
+gem 'react-rails',        '~> 2.2'
 
 
 group :development, :test do

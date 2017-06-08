@@ -3,8 +3,10 @@
 .section-chart
   .container
     .row
+      .col-md-offset-1.col-md-19#chart-navigation{ style: 'padding-left: 50px;' }
+        =text_field_tag(:report_date, '', id: 'text-date-navigation').html_safe
+    .row
       .col-md-offset-1.col-md-10.interest-rate-chart.center
-        -#.as-of-date As of 5/16/2017  # This will be where the current date navigation appears
 
         #chart-canvas-horizontal
           #chart-canvas{ style: 'position: relative; max-width: 877px;' }
@@ -65,8 +67,11 @@
       },
   };
 
-  add_data = function(yield_curve_date, values) {
-      console.log(config.data.datasets.length);
+  setDateNavigationText = function(text) {
+    $('input#text-date-navigation').val(text)
+  }
+
+  addData = function(yield_curve_date, values) {
     var newDataset = {
       label: "As of " + yield_curve_date,
       backgroundColor: nextChartColor(config.data.datasets.length + 1),
@@ -76,6 +81,11 @@
     };
 
     config.data.datasets.push(newDataset);
+    window.chartTreasuryYieldCurve.update();
+  }
+
+  removeTopDataset = function() {
+    config.data.datasets.pop();
     window.chartTreasuryYieldCurve.update();
   }
 
@@ -93,12 +103,16 @@
     };
   }
 
-  fetch_data = function(as_of_date) {
+  fetchData = function(as_of_date, replace=false) {
     if(as_of_date==null) as_of_date = new Date();
 
     $.get('/api/v1/yield_curve_snapshot', {date: formatDate(as_of_date, 'YYYYMMDD')}, function(data) {
-        add_data(
-          formatDate(new Date(Date.parse(data[0]['yield_curve_date'] + " GMT-0400 (EDT)"))),
+        if(replace) {
+          removeTopDataset();
+        };
+        sDate = formatDate(new Date(Date.parse(data[0]['yield_curve_date'].replace(/-/g, '/') + " GMT-0400 (EDT)")))
+        addData(
+          sDate,
           [
             parseFloat(data[0]['yield_1m']),
             parseFloat(data[0]['yield_3m']),
@@ -113,6 +127,7 @@
             parseFloat(data[0]['yield_30y']),
           ]
         );
+        setDateNavigationText(sDate);
     });
   }
 
@@ -124,8 +139,15 @@
   window.onload = function() {
       var ctx = document.getElementById("chartTreasuryYieldCurve").getContext("2d");
       window.chartTreasuryYieldCurve = new Chart(ctx, config);
-      fetch_data();
+      fetchData();
   };
+
+  $("#text-date-navigation").datepicker({
+    onSelect: function(dateText, inst) {
+        var date = new Date($(this).val());
+        fetchData(date, true)
+    }
+  });
 
   // document.getElementById('randomizeData').addEventListener('click', function() {
   //     config.data.datasets.forEach(function(dataset) {
