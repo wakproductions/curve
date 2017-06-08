@@ -9,6 +9,8 @@
         =text_date_navigation
         .action-button.yellow-bg#date-navigate-forward{ style: 'margin-left: 3px;'}
           %i.fa.fa-lg.fa-angle-right{ 'aria-hidden': "true" }
+        .action-button.blue-bg#stick-current-graph{ style: 'margin-left: 30px;'}
+          %i.fa.fa-lg.fa-paperclip{ 'aria-hidden': "true" }
     .row
       .col-md-offset-1.col-md-10.interest-rate-chart.center
 
@@ -171,6 +173,18 @@
       fetchData(new Date(previousDate(selectedDate())), true);
     }
   )
+
+  $("#date-navigate-forward").click(function() {
+      fetchData(new Date(nextDate(selectedDate())), true);
+    }
+  )
+
+  $("#stick-current-graph").click(function() {
+      fetchData(new Date(selectedDate()), false);
+    }
+  )
+
+
 
 
 = render partial: 'google_analytics'
