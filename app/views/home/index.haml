@@ -2,8 +2,9 @@
 
 .section-chart
   .container
+
     .row
-      .col-md-offset-1.col-md-19#chart-navigation{ style: 'padding-left: 50px;' }
+      .col-md-offset-1.col-md-10#chart-navigation{ style: 'padding-left: 50px;' }
         .action-button.yellow-bg#date-navigate-backward{ style: 'margin-right: 3px;'}
           %i.fa.fa-lg.fa-angle-left{ 'aria-hidden': "true" }
         =text_date_navigation
@@ -21,6 +22,14 @@
     .row
       .col-lg-12.center
         = "For an explanation: #{link_to('Term Structure of Interest Rates', 'http://www.investopedia.com/terms/t/termstructure.asp', target: '_blank')}".html_safe
+
+    .row{ style: 'margin-top: 25px;'}
+      .col-md-offset-1.col-md-5{ style: 'height: 40px; padding-top: 10px; text-align: left; border-left: 1px solid black; border-top: 1px solid black; border-bottom: 1px solid black;' }
+        = link_to('Contact', 'mailto:wak@wakproductions.com')
+      .col-md-5{ style: 'height: 40px; padding-top: 10px; text-align: right; border-right: 1px solid black; border-top: 1px solid black; border-bottom: 1px solid black;' }
+        :erb
+          <iframe src="https://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fwww.ustreasuryyieldcurve.com%2F&width=61&layout=button_count&action=like&size=small&show_faces=false&share=false&height=21" width="61" height="21" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
+          <a href="https://twitter.com/share" class="twitter-share-button" data-via="GreenspudTrades" data-show-count="false">Tweet</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
 :javascript
