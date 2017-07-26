@@ -26,7 +26,24 @@ module API
 
       def as_of_date
         if params[:date].present?
-          [Date.parse(params[:date], '%Y%m%d'), YieldCurveSnapshot.maximum(:yield_curve_date)].min
+
+          # Offset parameter is used for getting the next/previous available Date
+          if offset.nil? || offset == 0
+            params[:date]
+          elsif offset > 0
+            YieldCurveSnapshot
+              .where('yield_curve_date > ?', params[:date])
+              .order(:yield_curve_date)
+              .first
+              .try(:yield_curve_date) || YieldCurveSnapshot.maximum(:yield_curve_date)
+          elsif offset < 0
+            YieldCurveSnapshot
+              .where('yield_curve_date < ?', params[:date])
+              .order(yield_curve_date: :desc)
+              .first
+              .try(:yield_curve_date) || YieldCurveSnapshot.minimum(:yield_curve_date)
+          end
+          
         else
           YieldCurveSnapshot.maximum(:yield_curve_date)
         end
@@ -47,6 +64,13 @@ module API
             ycs_a
           end
       end
+
+      private
+
+      def offset
+        params[:offset].to_i
+      end
+
     end
   end
 end

@@ -113,10 +113,10 @@
     };
   }
 
-  fetchData = function(as_of_date, replace=false) {
+  fetchData = function(as_of_date, replace=false, offset=0) {
     if(as_of_date==null) as_of_date = new Date();
 
-    $.get('/api/v1/yield_curve_snapshot', {date: formatDate(as_of_date, 'YYYYMMDD')}, function(data) {
+    $.get('/api/v1/yield_curve_snapshot', {date: formatDate(as_of_date, 'YYYYMMDD'), offset: offset}, function(data) {
         if(replace) {
           removeTopDataset();
         };
@@ -146,16 +146,6 @@
     return chartColors[datasetnum % chartColors.length - 1];
   };
 
-  nextDate = function(current_date) {
-    date = current_date;
-    return date.setDate(date.getDate() + 1);
-  }
-
-  previousDate = function(current_date) {
-    date = current_date;
-    return date.setDate(date.getDate() - 1);
-  }
-
   window.onload = function() {
       var ctx = document.getElementById("chartTreasuryYieldCurve").getContext("2d");
       window.chartTreasuryYieldCurve = new Chart(ctx, config);
@@ -170,12 +160,12 @@
   });
 
   $("#date-navigate-backward").click(function() {
-      fetchData(new Date(previousDate(selectedDate())), true);
+      fetchData(new Date(selectedDate()), true, -1);
     }
   )
 
   $("#date-navigate-forward").click(function() {
-      fetchData(new Date(nextDate(selectedDate())), true);
+      fetchData(new Date(selectedDate()), true, 1);
     }
   )
 
