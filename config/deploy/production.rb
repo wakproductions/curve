@@ -8,6 +8,7 @@ namespace :custom do
       # https://stackoverflow.com/questions/19452983/capistrano-3-execute-within-a-directory
       execute "cd #{fetch(:deploy_to)}/current; sudo docker-compose build"
       execute "cd #{fetch(:deploy_to)}/current; sudo bin/run-production"
+      execute "sudo docker network prune"
 
       # Run the daemons
       # execute "cd #{fetch(:deploy_to)}/current; sudo docker-compose run -d web bundle exec rake yield_curve_snapshots:run_update_daemon"

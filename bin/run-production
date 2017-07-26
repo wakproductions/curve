@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 sudo docker stop $(sudo docker ps -q)
 sudo docker rm $(sudo docker ps -aq)
-sudo docker network prune
 sudo docker-compose up -d
 sudo docker-compose run -d web bundle exec rake yield_curve_snapshots:run_update_daemon
