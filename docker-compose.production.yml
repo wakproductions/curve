@@ -1,0 +1,4 @@
+version: '3'
+services:
+  web:
+    command: ["./wait-for-database.sh", "database", "5432", "--", "rake assets:precompile && bundle exec rails s -p 3000"]
