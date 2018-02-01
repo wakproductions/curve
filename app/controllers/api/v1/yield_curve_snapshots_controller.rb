@@ -31,12 +31,14 @@ module API
           if offset.nil? || offset == 0
             params[:date]
           elsif offset > 0
+            # Get the next date
             YieldCurveSnapshot
               .where('yield_curve_date > ?', params[:date])
               .order(:yield_curve_date)
               .first
               .try(:yield_curve_date) || YieldCurveSnapshot.maximum(:yield_curve_date)
           elsif offset < 0
+            # Get the previous date
             YieldCurveSnapshot
               .where('yield_curve_date < ?', params[:date])
               .order(yield_curve_date: :desc)
