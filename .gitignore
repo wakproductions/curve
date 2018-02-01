@@ -24,5 +24,6 @@
 .byebug_history
 .env.production
 
+/data/*
 /gitignore/*
 

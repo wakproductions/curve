@@ -8,7 +8,8 @@ namespace :yield_curve_snapshots do
     Daemons::UpdateYieldCurve.run
 
     while
-      sleep 100
+      # Keeps the thread alive indefinitely for Rufus scheduler to run
+      sleep 1000
     end
   end
 end
