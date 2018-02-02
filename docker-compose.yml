@@ -20,6 +20,7 @@ services:
     volumes:
       - ./log:/app/log
       - ./public/assets:/app/public/assets
+#      - ./:/app
 
   # See the setup instructions https://hub.docker.com/_/postgres/
   # Database initialized with the command:
