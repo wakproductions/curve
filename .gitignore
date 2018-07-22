@@ -28,3 +28,8 @@
 /data/*
 /gitignore/*
 
+# Rails 5.2 additions
+/storage/*
+/public/assets/*
+config/master.key
+

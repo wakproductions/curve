@@ -1,14 +1,11 @@
-ruby '2.4.2'
+ruby '2.5.1'
 source 'https://rubygems.org'
 
-git_source(:github) do |repo_name|
-  repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
-  "https://github.com/#{repo_name}.git"
-end
+git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-gem 'rails',          '~> 5.1.1'
+gem 'rails',          '~> 5.2'
 gem 'pg',             '~> 0.20'
-gem 'puma',           '~> 3.7'
+gem 'puma',           '~> 3.11'
 
 gem 'bootstrap-sass', '~> 3.3.7'
 gem 'coffee-rails',   '~> 4.2'
