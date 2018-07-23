@@ -23,3 +23,19 @@
 # For further information see the following documentation:
 # https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy-Report-Only
 # Rails.application.config.content_security_policy_report_only = true
+#
+# message from `bundle exec rails webpacker:install`
+# You need to allow webpack-dev-server host as allowed origin for connect-src.
+# This can be done in Rails 5.2+ for development environment in the CSP initializer
+# config/initializers/content_security_policy.rb with a snippet like this:
+# policy.connect_src :self, :https, "http://localhost:3035", "ws://localhost:3035" if Rails.env.development?
+#
+# message from `bundle exec rails webpacker:install:vue`
+# You need to enable unsafe-eval rule.
+# This can be done in Rails 5.2+ for development environment in the CSP initializer
+# config/initializers/content_security_policy.rb with a snippet like this:
+# if Rails.env.development?
+#   policy.script_src :self, :https, :unsafe_eval
+# else
+#   policy.script_src :self, :https
+# end

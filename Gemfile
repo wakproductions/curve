@@ -6,6 +6,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 gem 'rails',          '~> 5.2'
 gem 'pg',             '~> 0.20'
 gem 'puma',           '~> 3.11'
+gem 'webpacker',      '~> 3.5'
 
 gem 'bootstrap-sass', '~> 3.3.7'
 gem 'coffee-rails',   '~> 4.2'
@@ -41,7 +42,7 @@ group :development, :test do
 end
 
 group :development do
-  gem 'web-console', '>= 3.3.0'
+  # gem 'web-console', '>= 3.3.0'
   gem 'listen',      '~> 3.0.5', '< 3.2'
 
   gem 'capistrano',         '3.6.1'

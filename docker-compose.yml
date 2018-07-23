@@ -7,6 +7,8 @@ services:
     command: ["./wait-for-database.sh", "database", "5432", "--", "bundle exec rails s -p 3000"]
     depends_on:
       - database
+      - webpack
+    env_file: .env
     environment:
       - RAILS_ENV=${RAILS_ENV:-development}
       - DATABASE_URL=${DATABASE_URL:-postgres://database:5432}
@@ -19,8 +21,23 @@ services:
     tty: true
     volumes:
       - ./log:/app/log
-      - ./public/assets:/app/public/assets
+      - ./public:/app/public
 #      - ./:/app
+
+  webpack:
+    build: .
+    container_name: ycurve_webpack
+    command: "bundle exec bin/webpack-dev-server"
+    env_file: .env
+    networks:
+      - ycurve
+    ports:
+      - ${WEBPACK_PORT:-3035}:3035
+    tty: true
+    volumes:
+      - ./:/app
+#      - ./log:/app/log
+#      - ./public/assets:/app/public/assets
 
   # See the setup instructions https://hub.docker.com/_/postgres/
   # Database initialized with the command:
