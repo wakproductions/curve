@@ -6,6 +6,6 @@ RUN npm install yarn -g
 WORKDIR /app
 ADD . /app
 
-RUN gem install bundler -v 1.15.4
+RUN gem install bundler -v 1.16.1
 RUN bundle install
 
